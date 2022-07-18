@@ -1,0 +1,97 @@
+version: "3"
+services:
+  # Service Name Defined as web
+  vote:
+    # Pull the Image from Repository.
+    # replace username/repo:tag with your name and image details
+    image: dockersamples/examplevotingapp_vote:before
+    # Command used to deploy the Service
+    deploy:
+      # Run 5 instances of that image as a service called web
+      replicas: 5
+      resources:
+        # Limiting each one to use, at most, 10% of a single core of CPU time and 50MB of RAM.
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      # Immediately restart containers if one fails.     
+      restart_policy:
+        condition: on-failure
+    # Map port 4000 on the host to web’s port 80.    
+    ports:
+      - "5000:80"
+    # Define default network  
+    networks:
+      - front_end_network
+
+  worker:
+    # Pull the image fromt the repo
+    image: dockersamples/worker
+    networks:
+      - front_end_network
+      - back_end_network
+
+  redis:
+    # Pull the image fromt the repo
+    image: redis
+    deploy:
+      replicas: 5
+      resources:
+        # Limiting each one to use, at most, 10% of a single core of CPU time and 50MB of RAM.
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      # Immediately restart containers if one fails.     
+      restart_policy:
+        condition: on-failure
+    networks:
+      - front_end_network
+
+
+  db:
+    # Pull the image fromt the repo
+    image: postgres:9.4
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - "cache:/var/lib/postgresql/data"
+      - "./data_sql:/var/lib/postgresql/data"
+    deploy:
+      replicas: 1
+      resources:
+        # Limiting each one to use, at most, 10% of a single core of CPU time and 50MB of RAM.
+        limits:
+          cpus: "0.3"
+          memory: 50M
+      # Immediately restart containers if one fails.     
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:  [node.role == manager]
+    networks:
+      - back_end_network
+
+  result:
+    # Pull the image fromt the repo
+    image: dockersamples/examplevotingapp_result:before
+    ports:
+      - "5001:80"
+    deploy:
+      replicas: 5
+      resources:
+        # Limiting each one to use, at most, 10% of a single core of CPU time and 50MB of RAM.
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      # Immediately restart containers if one fails.     
+      restart_policy:
+        condition: on-failure
+    networks:
+      - back_end_network
+
+
+networks:
+  front_end_network:
+  back_end_network:
+volumes:
+  cache:
