@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
-  replicas: 3
+  replicas: 1
   serviceName: mysql
   selector:
     matchLabels:
@@ -22,11 +22,18 @@ spec:
               protocol: TCP
               containerPort: 3306
           env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom: 
-               secretKeyRef: 
-                key: ROOT_PASSWORD
-                name: mysecret
+            - name: "MYSQL_USER"
+              value: "helloworld"
+            - name: "MYSQL_PASSWORD"
+              value: "password"
+            - name: "MYSQL_DATABASE"
+              value: "helloworld"
+            - name: "MYSQL_ROOT_PASSWORD"
+              value: "rootpassword"
+              # valueFrom: 
+              #  secretKeyRef: 
+              #   name: mysecret
+              #   key: MYSQL_ROOT_PASSWORD
           volumeMounts:
             - name: data
               mountPath: /var/lib/mysql
