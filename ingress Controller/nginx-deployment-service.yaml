@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  nginx-official-service
+spec:
+  selector:
+    app: nginx-official
+  type:  NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 31303

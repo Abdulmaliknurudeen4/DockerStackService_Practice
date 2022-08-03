@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  magical-nginx
+spec:
+  selector:
+    app: magical-nginx
+  type:  NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 31304
+    name: http
