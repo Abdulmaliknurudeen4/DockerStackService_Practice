@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wp-mysql-rules
+  labels:
+    name: wpmysql-ingress
+spec:
+  ingressClassName: http-ingress
+  rules:
+  - host: wordpress.example.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: wordpress-service
+            port: 
+              number: 80
