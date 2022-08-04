@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name:  wordpress-deployment
+  labels:
+    name:  my-name
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - image:  wordpress:5.2-php7.1
+        name:  wordpress
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "100M"
+        env:
+        - name:  WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: db-password
+              name: wordpress-secrets
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-db

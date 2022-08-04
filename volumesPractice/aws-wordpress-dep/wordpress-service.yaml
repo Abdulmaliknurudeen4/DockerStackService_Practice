@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  wordpress
+spec:
+  selector:
+    app:  wordpress
+  type:  LoadBalancer
+  ports:
+  - port:  80
+    targetPort:  http-port
+    protocol: TCP
