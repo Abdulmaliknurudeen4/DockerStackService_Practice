@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  helloworld-deployment
+  namespace: mynamespace
+  labels:
+    app: nginx-ssl
+spec:
+  # the third replica will not be started
+  # because the 2 pods will consume 1GiB of memory so it's left with nothing
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-ssl
+  template:
+    metadata:
+      labels:
+        app: nginx-ssl
+    spec:
+      containers:
+      - image:  nginx:1.16
+        name:  k8s-demo 
+        ports:
+        - containerPort:  8081
+        resources:
+          requests:
+            cpu: 200m
+            memory: 0.5Gi
+          limits:
+            cpu: 400m
+            memory: 1Gi
