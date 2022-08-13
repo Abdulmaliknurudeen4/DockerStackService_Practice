@@ -10,7 +10,7 @@ spec:
   - host: nginx-official.example.com
     http:
       paths:
-      - pathType: Prefix
+      - pathType: Exact
         path: /
         backend:
           service:
@@ -20,7 +20,7 @@ spec:
   - host: magical-nginx.example.com
     http:
       paths:
-      - pathType: Prefix
+      - pathType: Exact
         path: /
         backend:
           service:
