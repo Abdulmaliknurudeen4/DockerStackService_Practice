@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  network-policy
+  labels:
+    role: test-network-policy
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: network-policy
+  labels:
+    app: frontend
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+  namespace: network-policy
+  labels:
+    app: client
+spec:
+  containers:
+  - name: busyboc
+    image: radial/busyboxplus:curl
+    command:
+      - sleep
+      - "3600"
