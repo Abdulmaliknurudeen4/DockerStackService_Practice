@@ -4,6 +4,6 @@ resource "aws_instance" "MyFirstInstance" {
   count = 3
 
   tags={
-    Name = "threedemoinstances"
+    Name = "demoinstance-${count.index}"
   }
 }
