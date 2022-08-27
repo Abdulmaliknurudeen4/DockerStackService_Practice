@@ -27,8 +27,8 @@ variable "AMIS" {
     us-west-1 = "ami-007ef5e8a5e43d323"
     us-west-2 = "ami-07b8a117da8f2c473"
   }
-
-  variable "PATH_TO_PRIVATE_KEY"{
+  }
+variable "PATH_TO_PRIVATE_KEY"{
     default = "levelup_key"
   }
 
@@ -38,5 +38,3 @@ variable "AMIS" {
   variable "INSTANCE_USERNAME"{
     default = "ubuntu"
   }
-
-}
