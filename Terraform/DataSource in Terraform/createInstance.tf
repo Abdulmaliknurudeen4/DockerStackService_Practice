@@ -4,7 +4,7 @@ data "aws_availability_zones" "availability" {
 data "aws_ami" "Latest-ubuntu" {
   # provides the metadata
   most_recent = true
-  owner = ["099720109477"]
+  owners = ["099720109477"]
   
   filter {
     name = "name"
