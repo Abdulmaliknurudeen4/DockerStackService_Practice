@@ -3,14 +3,14 @@ data "aws_ip_ranges" "us_east_ip_range" {
   services = [ "ec2" ]
 }
 resource "aws_security_group" "sg-custom_us_east1" {
-  ingress = [ {
+  ingress {
     cidr_blocks = data.aws_ip_ranges.us_east_ip_range.cidr_blocks
     description = "value"
     from_port = "443"
     protocol = "TCP"
     self = false
     to_port = 443
-  } ]
+  }
 
   tags = {
     CreateDate = data.aws_ip_ranges.us_east_ip_range.create_date
