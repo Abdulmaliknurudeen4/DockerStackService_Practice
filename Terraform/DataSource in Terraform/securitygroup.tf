@@ -13,7 +13,7 @@ resource "aws_security_group" "sg-custom_us_east1" {
   } ]
 
   tags = {
-    CreateDate = data.aws_ip_ranges.us_east_ip_range.create_data
+    CreateDate = data.aws_ip_ranges.us_east_ip_range.create_date
     SyncToken = data.aws_ip_ranges.us_east_ip_range.sync_token
   }
 }
