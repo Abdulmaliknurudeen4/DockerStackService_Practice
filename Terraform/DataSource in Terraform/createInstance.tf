@@ -31,5 +31,5 @@ resource "aws_instance" "MyFirstInstance" {
   
 }
  output "public_ip" {
-    value = aws_instance.MyFirstInstance.pubic_ip
+    value = aws_instance.MyFirstInstance.public_ip
   }
