@@ -34,7 +34,7 @@ variable "PATH_TO_PRIVATE_KEY"{
     default = "levelup_key"
   }
 
-  variable "PATH_TOP_PUBLIC_KEY"{
+  variable "PATH_TO_PUBLIC_KEY"{
     default = "levelup_key.pub"
   }
   variable "INSTANCE_USERNAME"{
