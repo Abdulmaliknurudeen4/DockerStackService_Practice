@@ -1,1 +1,3 @@
 #make your ssh-agen to generate your public key for your machine
+ssh-keygen -f levelup_key
+execute it in your machine
