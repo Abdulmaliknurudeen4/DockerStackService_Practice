@@ -24,4 +24,13 @@ resource "aws_instance" "MyFirstInstance" {
   tags = {
     "Name" = "custom_instance"
   }
+
+  provisioner "local-exec" {
+      command = "echo aws_instance.MyFirstInstance.private_ip >> my_private_ips.txt"
+    }
+  output "public_id" {
+    value = aws_instance.MyFirstInstance.pubic_ip
+  }
+
+  
 }
