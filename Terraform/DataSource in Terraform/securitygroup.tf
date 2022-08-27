@@ -4,7 +4,7 @@ data "aws_ip_ranges" "us_east_ip_range" {
 }
 resource "aws_security_group" "sg-custom_us_east1" {
   ingress {
-    cidr_blocks = data.aws_ip_ranges.us_east_ip_range.cidr_blocks
+    cidr_blocks = data.aws_ip_ranges.us_east_ip_range.cidr_blocks[4]
     description = "value"
     from_port = "443"
     protocol = "TCP"
