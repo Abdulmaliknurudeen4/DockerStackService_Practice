@@ -26,7 +26,7 @@ resource "aws_instance" "MyFirstInstance" {
   }
 
   provisioner "local-exec" {
-      command = "echo aws_instance.MyFirstInstance.private_ip >> my_private_ips.txt"
+      command = "echo ${aws_instance.MyFirstInstance.private_ip} >> my_private_ips.txt"
     }
   
 }
