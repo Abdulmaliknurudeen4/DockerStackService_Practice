@@ -100,7 +100,7 @@ resource "aws_internet_gateway" "levelup-gw" {
 
 #Defining The Routing Tables
 resource "aws_route_table" "levelup-public" {
-  vpc_id = aws_vpc.levelup_vpc.id.id
+  vpc_id = aws_vpc.levelup_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
