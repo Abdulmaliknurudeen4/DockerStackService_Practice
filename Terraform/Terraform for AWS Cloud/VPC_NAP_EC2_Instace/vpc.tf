@@ -121,17 +121,17 @@ resource "aws_route_table" "levelup-public" {
 resource "aws_route_table_association" "levelup-public-1-a" {
 #public subnets
   subnet_id      = aws_subnet.levelupvpc-public-1.id
-  route_table_id = aws_route_table.levelup-public
+  route_table_id = aws_route_table.levelup-public.id
 }
 
 resource "aws_route_table_association" "levelup-public-2-a" {
 #public subnets
   subnet_id      = aws_subnet.levelupvpc-public-2.id
-  route_table_id = aws_route_table.levelup-public
+  route_table_id = aws_route_table.levelup-public.id
 }
 
 resource "aws_route_table_association" "levelup-public-3-a" {
 #public subnets
   subnet_id      = aws_subnet.levelupvpc-public-3.id
-  route_table_id = aws_route_table.levelup-public
+  route_table_id = aws_route_table.levelup-public.id
 }
