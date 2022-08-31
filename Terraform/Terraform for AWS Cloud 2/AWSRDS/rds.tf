@@ -11,7 +11,7 @@ resource "aws_db_parameter_group" "levelup-mariadb-parameters" {
   description = "Maria DB parameter Group"
 
   parameter {
-    name = "max_allowed_packets"
+    name = "max_allowed_packet"
     value="16777216"
   }
 }
