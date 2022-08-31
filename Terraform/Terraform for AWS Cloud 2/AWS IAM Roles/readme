@@ -1,0 +1,7 @@
+Run your ssh iP -l ubuntu -i keylocation
+install python and python pip
+then install aws cli
+try copying files into your s3 bucket
+aws s3 cp ./file direction  s3://bucketpath
+
+it grants your ec2 instance the access to s3 directtly
