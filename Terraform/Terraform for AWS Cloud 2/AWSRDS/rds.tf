@@ -24,7 +24,7 @@ resource "aws_db_instance" "levelup-mariadb" {
   identifier = "mysql"
   name = "mysqlme"
   username = "root"
-  password = "root"
+  password = "password360444"
   db_subnet_group_name = aws_db_subnet_group.mariadb-subnets.name
   parameter_group_name = aws_db_parameter_group.levelup-mariadb-parameters.name
   multi_az = false
