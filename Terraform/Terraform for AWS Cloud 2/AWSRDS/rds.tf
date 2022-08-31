@@ -18,13 +18,13 @@ resource "aws_db_parameter_group" "levelup-mariadb-parameters" {
 # Define the RDS INstance Properties
 resource "aws_db_instance" "levelup-mariadb" {
   allocated_storage = 20
-  engine = "mariadb"
-  engine_version = "10.4.8"
+  engine = "mysql"
+  engine_version = "5.7"
   instance_class = "db.t2.micro"
-  identifier = "mariadb"
-  name = "mariadb"
+  identifier = "mysql"
+  name = "mysql"
   username = "root"
-  password = "mariadb141"
+  password = "root"
   db_subnet_group_name = aws_db_subnet_group.mariadb-subnets.name
   parameter_group_name = aws_db_parameter_group.levelup-mariadb-parameters.name
   multi_az = false
