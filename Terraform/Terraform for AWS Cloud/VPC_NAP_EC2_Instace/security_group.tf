@@ -12,8 +12,7 @@ resource "aws_security_group" "allow-levelup-ssh" {
     to_port          = 22
     protocol         = "tcp"
     #specify your machine's IP address for access purpose
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    cidr_blocks      = ["161.35.96.155"]
   }
 
   egress {
