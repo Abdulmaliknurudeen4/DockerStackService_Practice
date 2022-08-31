@@ -22,7 +22,7 @@ resource "aws_db_instance" "levelup-mariadb" {
   engine_version = "5.7"
   instance_class = "db.t2.micro"
   identifier = "mysql"
-  name = "mysql"
+  name = "mysqlme"
   username = "root"
   password = "root"
   db_subnet_group_name = aws_db_subnet_group.mariadb-subnets.name
