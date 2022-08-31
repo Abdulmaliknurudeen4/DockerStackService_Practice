@@ -24,9 +24,12 @@ variable "Security_Group" {
 variable "AMIS" {
   type = map
   default = {
+   us-east-1 = "ami-0c77c2e3d6602e7a5"
+    us-east-2 = "ami-05803413c51f242b7"
     us-west-1 = "ami-007ef5e8a5e43d323"
     us-west-2 = "ami-07b8a117da8f2c473"
   }
+  
 }
 
 variable "PATH_TO_PRIVATE_KEY"{
