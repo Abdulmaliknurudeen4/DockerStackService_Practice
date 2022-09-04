@@ -1,12 +1,12 @@
 variable "AWS_ACCESS_KEY" {
   type = string
   description = "This is the AWS ACCESS KEY to the root account."
-  default = "AKIA43OIJPT5MM3C532S"
+  default = "AKIA43OIJPT5PTZFKCDR"
 }
 variable "AWS_SECRET_KEY" {
   type = string
   description = "This is the AWS SECRET KEY"
-  default = "Tr0eRAYHwbjOgVDa8WKbV01ug24kaBZ03RAE/Xyi"
+  default = "d8N3Wbg4paCwrcrDlz/SPNPuWY74De7uMoDxBNib"
 
 }
 variable "AWS_REGION" {
