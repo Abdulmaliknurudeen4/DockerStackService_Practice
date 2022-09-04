@@ -59,7 +59,7 @@ resource "aws_security_group" "levelup-elb-securitygroup" {
 # But the Instance is only available to the ELB on port 80
 # That's the purpose of this security group.
 resource "aws_security_group" "levelup-instance" {
-  vpc_id      = aws_vpc.levelupvpc.id
+  vpc_id      = aws_vpc.levelup_vpc.id
   name        = "levelup-instance"
   description = "security group for instances"
   
