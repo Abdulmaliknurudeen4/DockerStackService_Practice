@@ -31,7 +31,7 @@ resource "aws_elb" "levelup-elb" {
 
 #Security group for AWS ELB
 resource "aws_security_group" "levelup-elb-securitygroup" {
-  vpc_id      = aws_vpc.levelupvpc.id
+  vpc_id      = aws_vpc.levelup_vpc.id
   name        = "levelup-elb-sg"
   description = "security group for Elastic Load Balancer"
   
