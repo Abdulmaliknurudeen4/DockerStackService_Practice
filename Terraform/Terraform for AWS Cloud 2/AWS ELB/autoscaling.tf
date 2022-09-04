@@ -8,6 +8,7 @@ resource "aws_launch_configuration" "levelup-launchconfig" {
   user_data       = "#!/bin/bash\napt-get update\napt-get -y install net-tools nginx\nMYIP=`ifconfig | grep -E '(inet 10)|(addr:10)' | awk '{ print $2 }' | cut -d ':' -f2`\necho 'Hello Team\nThis is my IP: '$MYIP > /var/www/html/index.html"
 
   lifecycle {
+    # if the instance already exists. destroy it
     create_before_destroy = true
   }
 }
