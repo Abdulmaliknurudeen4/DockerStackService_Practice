@@ -40,7 +40,6 @@ resource "aws_security_group" "levelup_webservers"{
 
   }
   
-  #HTTPS ingress rule
   ingress {
     from_port = 443
     to_port = 443
@@ -86,7 +85,7 @@ resource "aws_autoscaling_group" "levelup_webserver" {
   desired_capacity          = 1
   force_delete              = true
   launch_configuration      = aws_launch_configuration.launch_config_webserver.name
-  vpc_zone_identifier       = ["${module.levelup-vpc.public_subnet1_id}", "${module.levelup-vpc.public_subnet2_id}"]
+  vpc_zone_identifier       = ["${var.vpc_public_subnet1}", "${var.vpc_public_subnet2}"]
   target_group_arns         = [aws_lb_target_group.load-balancer-target-group.arn]
 }
 
@@ -96,7 +95,7 @@ resource "aws_lb" "levelup-load-balancer" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.levelup_webservers_alb.id]
-  subnets            = ["${module.levelup-vpc.public_subnet1_id}", "${module.levelup-vpc.public_subnet2_id}"]
+  subnets            = ["${var.vpc_public_subnet1}", "${var.vpc_public_subnet2}"]
 
 }
 
@@ -105,8 +104,7 @@ resource "aws_lb_target_group" "load-balancer-target-group" {
   name     = "load-balancer-target-group"
   port     = 80
   protocol = "HTTP"
-  # vpc_id   = var.vpc_id
-  vpc_id = module.levelup-vpc.my_vpc_id
+  vpc_id   = var.vpc_id
 }
 
 # Adding HTTP listener
