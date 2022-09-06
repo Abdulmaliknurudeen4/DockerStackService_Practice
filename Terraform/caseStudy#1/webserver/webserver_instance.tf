@@ -75,6 +75,7 @@ resource "aws_launch_configuration" "launch_config_webserver" {
     volume_type = "gp2"
     volume_size = "20"
   }
+
 }
 
 resource "aws_autoscaling_group" "levelup_webserver" {
@@ -125,5 +126,5 @@ output "load_balancer_output" {
 }
 
 output "associate_public_ip_address" {
-  value = aws_launch_configuration.launch_config_webserver.associate_public_ip_address
+  value = "me"
 }
