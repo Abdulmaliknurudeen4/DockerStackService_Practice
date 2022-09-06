@@ -2,6 +2,7 @@
 #Call VPC Module First to get the Subnet IDs
 # module "levelup-vpc" {
 #     source      = "../vpc"
+
 #     ENVIRONMENT = var.ENVIRONMENT
 #     AWS_REGION  = var.AWS_REGION
 # }
@@ -11,13 +12,9 @@ resource "aws_db_subnet_group" "levelup-rds-subnet-group" {
 
     name          = "${var.ENVIRONMENT}-levelup-db-snet"
     description   = "Allowed subnets for DB cluster instances"
-    # subnet_ids    = [
-    #   "${var.vpc_private_subnet1}",
-    #   "${var.vpc_private_subnet2}",
-    # ]
-    subnet_ids = [
-      "${module.levelup-vpc.private_subnet1_id}",
-      "${module.levelup-vpc.private_subnet2_id}"
+    subnet_ids    = [
+      "${var.vpc_private_subnet1}",
+      "${var.vpc_private_subnet2}",
     ]
     tags = {
         Name         = "${var.ENVIRONMENT}_levelup_db_subnet"
@@ -29,8 +26,7 @@ resource "aws_security_group" "levelup-rds-sg" {
 
   name = "${var.ENVIRONMENT}-levelup-rds-sg"
   description = "Created by LevelUp"
-  # vpc_id      = var.vpc_id
-  vpc_id      = module.levelup-vpc.my_vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port = 3306
