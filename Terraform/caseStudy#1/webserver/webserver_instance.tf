@@ -123,6 +123,7 @@ resource "aws_lb_listener" "webserver_listner" {
 output "load_balancer_output" {
   value = aws_lb.levelup-load-balancer.dns_name
 }
-output "load_balancer_output" {
-  value = aws_lb.levelup-load-balancer.dns_name
+
+output "associate_public_ip_address" {
+  value = aws_launch_configuration.launch_config_webserver.associate_public_ip_address
 }
