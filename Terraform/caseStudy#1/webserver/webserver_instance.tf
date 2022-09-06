@@ -125,6 +125,6 @@ output "load_balancer_output" {
   value = aws_lb.levelup-load-balancer.dns_name
 }
 
-output "associate_public_ip_address" {
-  value = "me"
-}
+# output "associate_public_ip_address" {
+#   value = "me"
+# }
