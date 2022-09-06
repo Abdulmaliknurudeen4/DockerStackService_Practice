@@ -68,7 +68,8 @@ resource "aws_launch_configuration" "launch_config_webserver" {
   instance_type = var.INSTANCE_TYPE
   user_data = "#!/bin/bash\napt-get update\napt-get -y install net-tools nginx\nMYIP=`ifconfig | grep -E '(inet 10)|(addr:10)' | awk '{ print $2 }' | cut -d ':' -f2`\necho 'Hello Team\nThis is my IP: '$MYIP > /var/www/html/index.html"
   security_groups = [aws_security_group.levelup_webservers.id]
-  key_name = aws_key_pair.levelup_key.key_name
+  key_name = aws_key_pair.levelup_key.key_name 
+  associate_public_ip_address = true
   
   root_block_device {
     volume_type = "gp2"
@@ -119,6 +120,9 @@ resource "aws_lb_listener" "webserver_listner" {
   }
 }
 
+output "load_balancer_output" {
+  value = aws_lb.levelup-load-balancer.dns_name
+}
 output "load_balancer_output" {
   value = aws_lb.levelup-load-balancer.dns_name
 }
