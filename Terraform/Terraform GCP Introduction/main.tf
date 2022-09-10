@@ -13,6 +13,6 @@ terraform {
   backend "gcs" {
     bucket = "tf-state-prod-abdulmalik"
     prefix = "terraform-practice/"
-    credentials = file("auth.json")
+    # credentials = file("auth.json")
   }
 }
