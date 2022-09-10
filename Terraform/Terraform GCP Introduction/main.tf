@@ -1,6 +1,6 @@
 provider "google" {
   credentials = file("auth.json")
-  project = "	cloudprojectterraform"
+  project = "cloudprojectterraform"
   region = "us-east1"
   zone = "us-east1-c"
 }
