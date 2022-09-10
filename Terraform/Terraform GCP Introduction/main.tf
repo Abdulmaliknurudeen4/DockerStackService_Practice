@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("auth.json")
+  credentials = file("./auth.json")
   project = "cloudprojectterraform"
   region = "us-east1"
   zone = "us-east1-c"
@@ -13,6 +13,6 @@ terraform {
   backend "gcs" {
     bucket = "tf-state-prod-abdulmalik"
     prefix = "terraform-practice/"
-    # credentials = file("auth.json")
+    credentials = file("./auth.json")
   }
 }
