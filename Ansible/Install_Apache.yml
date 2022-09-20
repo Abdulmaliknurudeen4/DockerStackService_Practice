@@ -1,6 +1,7 @@
-
+#!/usr/local/bin/ansible-playbook
 - name:  Introduction Ansible Playbooks
   hosts: all
+  remote_user: ec2-user
   become: yes
   # gather_facts: false # disabling gathering facts
   become_user: root
