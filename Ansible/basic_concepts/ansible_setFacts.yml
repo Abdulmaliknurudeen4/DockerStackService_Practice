@@ -15,7 +15,7 @@
     - set_fact:
         bash_version: "{{bash_var.stdout_lines[0].split()[3]}}"
         my_value : "Bash Version"
-        bash_version2: 'bash_var.stdout_lines[0].split()[3].split("(")[0]'
+        bash_version2: "{{bash_var.stdout_lines[0].split()[3]}}"
 
     - debug: # narrows the value and split functions
         var: bash_var.stdout_lines[0].split()[3]
