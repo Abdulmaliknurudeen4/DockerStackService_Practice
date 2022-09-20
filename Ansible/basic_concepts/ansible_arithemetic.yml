@@ -1,0 +1,32 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    a : 10
+    b : 20
+    c : 5
+    d : 4
+    e : "{{c*20}}"
+  vars_prompt:
+    - name: ex
+      prompt: Please enter a Value for ex
+      private: no
+    - name: why
+      prompt: Please enter a Value for y
+      private: no
+  
+  tasks:
+  - name:  "Operation 1"
+    debug:
+      msg:
+      - "Value of {{a}} plus by {{b}} is {{a | int+ b | int}}"
+      - "Value of {{a}} minus by {{b}} is {{a | int - b | int}}"
+      - "Value of {{a}} times by {{b}} is {{a | int * b | int}}"
+      - "Value of {{a}} minus by {{b}} is {{a | int / b | int}}"
+      - "Value of e is {{e}}"
+      - "Value of ex by why is {{ex | int * why|int }}"
