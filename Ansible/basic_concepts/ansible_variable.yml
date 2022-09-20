@@ -1,0 +1,25 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Introduction Ansible Playbooks
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+  vars:
+    test: "hello this is dummy value"
+    my_name: "Nurudeen Abdulmalik"
+    my_age: 21
+    my_height: 5.11
+    is_male: true
+
+  tasks:
+  - name: "Task for Debug Module Messaging"
+    debug:
+      var: test
+  - name: "Task Module Messaging"
+    debug:
+      msg:
+      - "My name is {{my_name}}"
+      - "I am {{my_age}} years old."
+      - "I am of height {{my_height}}"
+      - "I am a male {{is_male}}"
