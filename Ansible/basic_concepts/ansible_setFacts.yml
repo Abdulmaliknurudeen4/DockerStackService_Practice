@@ -1,0 +1,27 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  tasks:
+    - name: "Retrieve Installed Shell Version"
+      shell: "bash --version"
+      # it won't print out the version unless you use Registers
+      register: bash_var
+
+    - set_fact:
+        bash_version: "{{bash_var.stdout_lines[0].split()[3]}}"
+        my_value : "Bash Version"
+        bash_version2: 'bash_var.stdout_lines[0].split()[3].split("(")[0]'
+
+    - debug: # narrows the value and split functions
+        var: bash_var.stdout_lines[0].split()[3]
+    - debug: # narrows the value and split functions
+        var: bash_var.stdout_lines[0].split()[3].split("(")[0]
+    - debug: # prints out the setFact(like Variables local to tasks)
+        var: bash_version
+    - debug: # prints out the setFact(like Variables local to tasks)
+        var: bash_version2

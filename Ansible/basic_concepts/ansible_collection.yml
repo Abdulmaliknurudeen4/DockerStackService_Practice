@@ -1,0 +1,31 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Introduction Ansible Playbooks
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    xyz: "Hello this is xyz"
+    packages: ['wget', 'unzip', 'curl', 'vim', 'httpd']
+    cities:
+    - "New York"
+    - "Dubai"
+    - "orchi"
+    web_server: {'Linux': 'httpd', 'Unix': 'apache2'}
+
+  tasks:
+    - name: "First Task"
+      debug:
+        msg:
+        - "{{xyz}}"
+    - name: "Getting Sequence F1"
+      debug:
+        var: packages
+    - name: "Getting Sequence F2"
+      debug:
+        var: cities
+    - name: "Getting Sequence F2"
+      debug:
+        var: web_server
