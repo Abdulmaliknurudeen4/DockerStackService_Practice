@@ -1,0 +1,31 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Introduction Ansible Playbooks
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+  tasks:
+  - name: "Task for Debug Module Messaging"
+    debug:
+      msg: "Hi, this is custom message for debug Module"
+
+  - name: "Task for Printing Multiple Messages"
+    debug:
+      msg:
+      - "Hi, This is multilien messages."
+      - "And i am line Number 2...."
+  - name: "Print Varaible in messages"
+    debug:
+      msg: 
+      - "Host IP is {{ inventory_hostname }}"
+      - Host IP is {{ inventory_hostname }}
+      - System {{inventory_hostname}} has gateway {{ ansible_default_ipv4.gateway }}
+
+  - name: "Printing out variables"
+    debug:
+      var: inventory_hostname
+  - name: "Verbosity in debug module"
+    debug:
+      msg: "Hi, this is deep level logging"
+      verbosity: 3
