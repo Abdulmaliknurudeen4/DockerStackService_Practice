@@ -1,0 +1,15 @@
+
+- name:  Introduction Ansible Playbooks
+  hosts: all
+  become: yes
+  # gather_facts: false # disabling gathering facts
+  become_user: root
+  tasks:
+  - name:  "Ensure Apache is at the Latest Version"
+    yum:
+      name:  httpd
+      state: latest
+  - name:  "Ensure Apache is running"
+    service:
+      name:  httpd
+      state: started
