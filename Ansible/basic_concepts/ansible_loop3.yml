@@ -32,7 +32,7 @@
 
   - name : install in Multiple2 using with together
     yum:
-      name: "{{item.1}}"
+      name: "{{item.0}}"
       state: present
     with_together:
       - "{{packages}}"
