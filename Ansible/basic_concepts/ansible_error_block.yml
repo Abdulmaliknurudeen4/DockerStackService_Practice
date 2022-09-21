@@ -5,25 +5,26 @@
   gather_facts: true # disabling gathering facts
 
   tasks:
+  - block:
+    - name: List all files in root Location
+      command: "ls -l /root/"
+      register: root_out
+    - debug: var=root_out
+
+    - name: List all files in Home Location
+      command: "ls -l ~/"
+      register: home_out
+    - debug: var=home_out
+
+    - name: List all files in bin Location
+      command: "ls -l /bin/"
+      register: bin_out
+    - debug: var=bin_out
+    become: yes
+    become_user: root
+    ignore_errors: yes
+
   - name: List all files in user Location
     command: "ls -l /usr/"
     register: usr_out
   - debug: var=usr_out
-
-  - name: List all files in root Location
-    command: "ls -l /root/"
-    become: yes
-    register: root_out
-  - debug: var=root_out
-
-  - name: List all files in Home Location
-    command: "ls -l ~/"
-    become: yes
-    register: home_out
-  - debug: var=home_out
-
-  - name: List all files in bin Location
-    command: "ls -l /bin/"
-    become: yes
-    register: bin_out
-  - debug: var=bin_out
