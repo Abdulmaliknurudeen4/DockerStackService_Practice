@@ -43,7 +43,7 @@
   # uses jinja2 template to set your server.xml files
     template:
       src: server.xml.j2
-      dest: /usr/local/tomcat/bin/server.xml
+      dest: /usr/local/tomcat/conf/server.xml
 
   - name: Starting Tomcat in Background
     shell: nohup /usr/local/tomcat/bin/startup.sh &
