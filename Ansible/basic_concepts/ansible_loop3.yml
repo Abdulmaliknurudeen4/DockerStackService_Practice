@@ -1,0 +1,38 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    packages : ['gettext-devel','openssl-devel','perl-devel','docker']
+  
+  tasks:
+  # Add  Multiple Users in one go
+  - name: Installing Multiple Packages
+    yum:
+      name: "{{item}}"
+      state: present
+    loop:
+      - gettext-devel
+      - openssl-devel
+      - perl-devel
+      - zlib-devel
+      - wget
+      - unzip
+      - docker
+  - name : uninstall in Multiple using indexed items
+    yum:
+      name: "{{item.1}}"
+      state: absent
+    with_indexed_items:
+      - "{{packages}}"
+
+  - name : install in Multiple2 using with together
+    yum:
+      name: "{{item.1}}"
+      state: present
+    with_together:
+      - "{{packages}}"
