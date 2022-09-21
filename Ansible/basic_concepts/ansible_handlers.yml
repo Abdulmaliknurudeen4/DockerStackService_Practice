@@ -1,0 +1,20 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Shows the Use of Comparison Operators
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  tasks:
+  - name: Ensure Apache is at the Latest Version
+    yum:
+      name: httpd
+      state: present
+    register: httpd_installation_status
+  
+  - name: Ensure Apache is running
+    service:
+      name: httpd
+      state: started
+    when: httpd_installation_status.changed == True
