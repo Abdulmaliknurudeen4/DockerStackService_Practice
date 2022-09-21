@@ -1,0 +1,26 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    a : "HeLLO tHIS is NurudEEN and I am A SOftwarE DevEloper"
+    b: 10
+    c: "20"
+    # | for jinja method and . for accessing python methods on the variables.
+  tasks:
+  - name:  "Operation 1"
+    debug:
+      msg:
+      - "Value of {{a}}"
+      - "Value of {{b | int + c | int}}"
+      - "Smaller Case of a is {{a|lower}}"
+      - "Smaller Case of a is {{a|upper}}"
+      - "Smaller Case of a is {{a|title}}"
+      - "Smaller Case of a is {{a.lower()}}"
+      - "Smaller Case of a is {{a.upper()}}"
+      - "Smaller Case of a is {{a.split()}}"
+      - "Smaller Case of a is {{a.title().split()}}"
