@@ -1,0 +1,44 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    alpha : ['a','b','c','d']
+    numbers : [1,2,3,4]
+  
+  tasks:
+  # Add  Multiple Users in one go
+  - name: add several Users
+    user:
+      name: "{{item}}"
+      state: present
+      groups: "users"
+    with_items:
+      - testuser1
+      - testuser2
+      - testuser5
+      - testuser10
+      - testuser11
+      - testuser12
+
+  - name: add several users and dynamic groups
+    user:
+      name: "{{item.name}}"
+      state: absent
+      groups: "{{item.groups}}"
+    with_items:
+      - {name: 'testuser3', groups: 'users'}
+      - {name: 'testuser4', groups: 'root'}
+      - {name: 'testuser40', groups: 'root'}
+      - {name: 'testuser46', groups: 'root'}
+  
+  - name: Loop over Set of Collection variables
+    debug:
+      msg: "{{item.0}} and {{item.1}}"
+    with_together:
+      - "{{alpha}}"
+      - "{{numbers}}"
