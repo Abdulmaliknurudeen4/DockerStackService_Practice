@@ -1,0 +1,15 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Local Action in Ansible
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  tasks: # the first task will run on the local machine and create the file and then we move it to the remote machine
+    - name: This will create a local file/tmp/localfile.ini 
+      local_action: command touch /tmp/"{{ansible_hostname}}"_local_file.ini
+    - name: Here we copy the local file to the remote
+      copy: # it turns a result of ip-172-31-17-94_local_file.ini to the remote system
+        src: /tmp/{{ansible_hostname}}_local_file.ini
+        dest: /var/tmp

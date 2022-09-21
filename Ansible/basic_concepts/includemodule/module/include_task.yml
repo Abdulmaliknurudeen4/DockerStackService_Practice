@@ -1,0 +1,14 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  tasks:
+    - name: Play 1 - Task 1
+      debug:
+        msg: Play 1 - Task 1
+    - include_tasks: # runs a second seperate task for the include task
+        file:  task-1.yml # path to the task file that contains the commont tasks
