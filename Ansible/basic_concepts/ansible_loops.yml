@@ -28,13 +28,13 @@
   - name: add several users and dynamic groups
     user:
       name: "{{item.name}}"
-      state: absent
+      state: present
       groups: "{{item.groups}}"
     with_items:
       - {name: 'testuser3', groups: 'users'}
       - {name: 'testuser4', groups: 'root'}
-      - {name: 'testuser40', groups: 'root'}
-      - {name: 'testuser46', groups: 'root'}
+      - {name: 'testuser40', groups: 'games'}
+      - {name: 'testuser46', groups: 'nobody'}
   
   - name: Loop over Set of Collection variables
     debug:
