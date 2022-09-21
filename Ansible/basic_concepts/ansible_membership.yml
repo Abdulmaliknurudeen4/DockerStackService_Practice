@@ -1,0 +1,36 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Shows the Use of Comparison Operators
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+
+  vars:
+    a : "HELLO"
+    x : "hello"
+    b: 10
+    c: 20
+    e: [20,100, 232, 231 ,123 ,2, 8 , 898, 8324, 324, 6423, 324 ,324]
+    dir: /home/ubuntu/ansible
+    filex: /home/ubuntu/ansible/ansible_variable.yml
+
+
+    # | for jinja method and . for accessing python methods on the variables.
+  tasks:
+  - name:  "Operation 1"
+    debug:
+      msg:
+      - "Value of {{a}}, Value of b is {{b}}, Value of c is {{c}}, {{e}}"
+      - "Is b member of e {{b in e}}"
+      - "Is b member of e {{c in e}}"
+      - "Is b member of e {{b not in e}}"
+  - name:  "Test Operations"
+    debug:
+      msg:
+      - "a is defined ? {{ a is defined }}"
+      - "c is defined ? {{ c is defined }}"
+      - "x is lower ? {{ x is lower }}"
+      - "dir is a Directory ? {{ dir is directory }}"
+      - "file is lower ? {{ filex is file }}"
