@@ -1,0 +1,40 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Registers and Set Facts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    alpha : ['a','b','c','d']
+    numbers : [1,2,3,4]
+  
+  tasks:
+  # Add  Multiple Users in one go
+  - name: Random Loooping Example
+    debug:
+      msg: "{{item}}"
+    with_random_choice:
+      - "go through the door"
+      - "drink from the goblet"
+      - "press the red button"
+      - "do nothing"
+
+  #Looping Over a list with an Index
+  - name : looping over a list indeexed
+    debug:
+      msg: "at array position {{item.0}} there is a value of {{item.1}}"
+    with_indexed_items:
+    #only works with list item, it cant work with map items 
+      - "{{alpha}}"
+  
+  # do until loop
+  - name: Ensure apache is running
+    service:
+      name: httpd
+      state: started
+    register: result
+    until: result.changed == True
+    retries: 7
+    delay: 5
