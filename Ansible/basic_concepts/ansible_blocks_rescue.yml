@@ -1,0 +1,26 @@
+#!/usr/local/bin/ansible-playbook
+- name:  ansible blocks and rescue
+  hosts: all
+  remote_user: ec2-user
+  gather_facts: true # disabling gathering facts
+
+  tasks:
+  - block:
+    - name: List home directory content
+      command: "ls -l ~/"
+    - name: Failing Intentionally
+      command: "ls -l /whereexitsnot"
+      # command: "ls -l /tmp" if the block passes, the rescue will not execute but the always block will execute.
+    become: yes
+    become_user: root
+    ignore_errors: yes
+    
+    rescue:
+      - name: Rescue block (perform recovery)
+        debug:
+          msg: 'Something went wrong, cleaning up'
+    
+    always:
+      - name: This will execute always
+        debug:
+          msg: 'I will execute even in failure scenario'
