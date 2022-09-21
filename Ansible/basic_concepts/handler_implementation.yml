@@ -21,4 +21,4 @@
   - name: handlerOne
     service:
       name: httpd
-      state: started
+      state: restarted
