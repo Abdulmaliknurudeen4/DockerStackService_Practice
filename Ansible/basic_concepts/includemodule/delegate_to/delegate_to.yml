@@ -1,0 +1,24 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Local Action in Ansible
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    tmplog: /tmp/connection.log
+
+  tasks:
+    - name: create tmplogs
+      shell: test ! -f {{tmplog}} && touch {{tmplog}} # create if not exit
+      failed_when: false # fail if any error occurs
+
+    - name: delegate_to
+      shell: echo "delegate_to . {{inventory_hostname}} $(hostname)." >> {{tmplog}}
+      # write the inventory_hostname and hostname to temp log file and it'll work on localhost
+      # you can define the name or ip of the machine
+      delegate_to: localhost # or specify like ec2-18-218-86-187.us-east-2.compute.amazonaws.com
+      # local_action is limited to the ansible controller engine
+      # delegate to: is for all machine on your ansible network
+      # delegate to is used for production purposes.
