@@ -50,3 +50,5 @@
       - five
 
 # --tags tag1,tag2,tag3 it is case sensitive
+# --skip-tags tag1,tag2 to skip certain task
+# ansible-playbook file.yml --list-tags
