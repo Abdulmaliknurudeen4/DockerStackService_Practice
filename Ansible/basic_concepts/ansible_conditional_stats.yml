@@ -1,0 +1,28 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Shows the Use of Comparison Operators
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+
+  vars:
+    x : 10
+    y : 20
+
+
+    # | for jinja method and . for accessing python methods on the variables.
+  tasks:
+  - name:  "Operation 1 for Conditional Statements"
+    debug:
+      msg:
+      - "Value of x={{x}}, Value of y = {{y}} "
+      - "x is Small of Y "
+    
+    when: x < y
+
+  - name: "Op2"
+    debug:
+      msg: "x is not small than Y"
+    when: x > y
