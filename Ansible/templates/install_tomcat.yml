@@ -1,0 +1,49 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Introduction Ansible Playbooks
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: false # disabling gathering facts
+  become_user: root
+
+  vars:
+    java_version: java-1.8.0-openjdk
+    alternative_path: java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64
+    tomcat_version: 9.0.65
+    tomcat_port: 8090
+
+  tasks:
+  - name:  Update all packages on machine. It is necessary
+    yum:
+      name: "*"
+      state: latest
+  - name: Installing Java on the machine.
+    yum:
+      name: "{{java_version}}"
+      state: present
+  - name: Set Java 8 alternative on machines
+    alternatives:
+      path:  /usr/lib/jvm/{{alternative_path}}/jre/bin/java
+      link:  /bin/java
+      name: java
+    ignore_errors: yes # continue for now.
+  
+  - name: Download Tomcat Tar file
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+      dest:  /usr/local
+  - name: Donwload Unzip/Untar
+    unarchive:
+      src: /usr/local/apache-tomcat-{{tomcat_version}}.tar.gz
+      dest: /usr/local
+      remote_src: yes
+  - name: Renamve Tomcat Dir
+    command: mv /usr/local/apache-tomcat-{{tomcat_version}} /usr/local/tomcat
+  - name: Setting port number to required
+  # uses jinja2 template to set your server.xml files
+    template:
+      src: server.xml.j2
+      dest: /usr/local/tomcat/bin/server.xml
+
+  - name: Starting Tomcat in Background
+    shell: nohup /usr/local/tomcat/bin/startup.sh &
