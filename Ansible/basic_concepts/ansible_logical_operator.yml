@@ -1,0 +1,30 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Shows the Use of Comparison Operators
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+
+  vars:
+    a : "HELLO"
+    x : "hello"
+    b: 10
+    c: 20
+    e: [20,100, 232, 231 ,123 ,2, 8 , 898, 8324, 324, 6423, 324 ,324]
+    y: true
+    z: false
+    p: false
+    m: true
+
+
+    # | for jinja method and . for accessing python methods on the variables.
+  tasks:
+  - name:  "Operation 1"
+    debug:
+      msg:
+      - "y and p {{y and p}}"
+      - "y and z {{y and z}}"
+      - "y or p {{y or p}}"
+      - "y and p {{y or z}}"
