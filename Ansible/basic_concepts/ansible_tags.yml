@@ -1,0 +1,52 @@
+#!/usr/local/bin/ansible-playbook
+- name:  Ansible Use of Tags
+  # hosts: all
+  hosts: localhost
+  remote_user: ec2-user
+  become: yes
+  gather_facts: true # disabling gathering facts
+  become_user: root
+
+  vars:
+    packages : ['gettext-devel','openssl-devel','perl-devel','docker']
+  
+  tasks:
+  # Tags are used to select tasks
+  - name: Operations using the Tags.1
+    debug:
+      msg:
+      - "Hi, this is debug message One"
+    tags:
+     - first
+
+  - name: Operations using the Tags.2
+    debug:
+      msg:
+      - "Hi, this is debug message Two"
+    tags:
+      - second
+      - common
+
+  - name: Operations using the Tags.3
+    debug:
+      msg:
+      - "Hi, this is debug message Three"
+    tags:
+      - three
+
+  - name: Operations using the Tags.4
+    debug:
+      msg:
+      - "Hi, this is debug message Four"
+    tags:
+      - four
+      - common
+
+  - name: Operations using the Tags.5
+    debug:
+      msg:
+      - "Hi, this is debug message Five"
+    tags:
+      - five
+
+# --tags tag1,tag2,tag3 it is case sensitive
