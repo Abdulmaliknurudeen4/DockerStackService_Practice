@@ -22,7 +22,3 @@
     service:
       name: httpd
       state: started
-  - name: handlerTwo
-    service:
-      name: httpd
-      state: status
