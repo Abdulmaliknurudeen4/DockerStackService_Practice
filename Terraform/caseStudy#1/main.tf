@@ -19,8 +19,8 @@ module "levelup-webserver" {
 }
 #Define Provider
 provider "aws" {
-   access_key = "AKIA43OIJPT5PTZFKCDR"
-  secret_key = "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"
+   access_key = "xxxxxxxxxxxxxxxxxxxxxxxx"
+  secret_key = "XXXXXXXXXXXXXXX"
   region = var.AWS_REGION
 }
 
